@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Resume Viewer</h1>
+        <div id="resume"></div>
+        <button id="download-btn">Download PDF</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const username = urlParams.get('username');
+            const resumeData = JSON.parse(localStorage.getItem(username));
+
+            if (resumeData) {
+                const resumeContent = document.getElementById('resume');
+                resumeContent.innerHTML = `
+                    <div class="profile">
+                        <h2>${resumeData.fname}</h2>
+                        <p>Email: ${resumeData.email}</p>
+                        <h3>Education</h3>
+                        <p>${resumeData.degree} from ${resumeData.school} (Class of ${resumeData.gradYear})</p>
+                        <h3>Work Experience</h3>
+                        <p>${resumeData.jobTitle} at ${resumeData.company} (${resumeData.years} years)</p>
+                        <h3>Skills</h3>
+                        <ul>
+                            ${resumeData.skills.map(skill => `<li>${skill}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+
+                document.getElementById('download-btn').addEventListener('click', () => {
+                    const opt = {
+                        margin: 1,
+                        filename: "Resume.pdf",
+                        image: { type: "jpeg", quality: 0.98 },
+                        html2canvas: { scale: 2 },
+                        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+                    };
+                    html2pdf().from(resumeContent).set(opt).save();
+                });
+            } else {
+                document.getElementById('resume').innerHTML = '<p>Resume not found.</p>';
+            }
+        });
+    </script>
+</body>
+</html>

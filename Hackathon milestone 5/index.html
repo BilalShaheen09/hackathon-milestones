@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shareable  Resume Builder</title>
+
+    <!-- Font Awesome CDN -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+
+
+         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Shareable Resume Builder</h1>
+        </header>
+        <main>
+            <form id="resumeForm">
+                <!-- Personal Information -->
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    <div class="form-group">
+                        <label for="fname">Full Name</label>
+                        <input type="text" id="fname" name="fname" placeholder="Enter Full Name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">Phone Number</label>
+                        <input type="text" id="contact" name="contact" placeholder="Enter Phone Number" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter Email Address" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" name="address" placeholder="Enter Residential Address" required />
+                    </div>
+                </fieldset>
+                <!-- Education -->
+                <fieldset>
+                    <legend>Education</legend>
+                    <div class="form-group">
+                        <label for="field">Field of Study</label>
+                        <input type="text" id="field" name="field" placeholder="Field of Study" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="institute">Institution Name</label>
+                        <input type="text" id="institute" name="institute" placeholder="Institution Name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Year</label>
+                        <input type="text" id="year" name="year" placeholder="Year of Passing" required />
+                    </div>
+                </fieldset>
+                <!-- Experience -->
+                <fieldset>
+                    <legend>Experience</legend>
+                    <div class="form-group">
+                        <label for="job">Job Title</label>
+                        <input type="text" id="job" name="job" placeholder="Job Title" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="comp">Company Name</label>
+                        <input type="text" id="comp" name="comp" placeholder="Company Name" required />
+                    </div>
+                    <div class="form-group date-range">
+                        <div class="form-group">
+                            <label for="sdate">Start Date</label>
+                            <input type="date" id="sdate" name="sdate" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="edate">End Date</label>
+                            <input type="date" id="edate" name="edate" required />
+                        </div>
+                    </div>
+                </fieldset>
+                <!-- Skills -->
+                <fieldset>
+                    <legend>Skills</legend>
+                    <div class="form-group">
+                        <label for="skill">Skill Name</label>
+                        <input type="text" id="skill" name="skill" placeholder="Write your skills here" required />
+                    </div>
+                </fieldset>
+                <!-- Objective -->
+                <fieldset>
+                    <legend>Objective</legend>
+                    <div class="form-group">
+                        <label for="objective">Career Objective</label>
+                        <textarea id="objective" name="objective" rows="4" placeholder="Write your Career Objective..." required></textarea>
+                    </div>
+                </fieldset>
+                <!-- Profile Picture -->
+                <fieldset>
+                    <legend>Add Profile Picture</legend>
+                    <div class="form-group">
+                        <input type="file" id="profile-pic" name="profile-pic" accept="image/*" required />
+                    </div>
+                </fieldset>
+                <button type="submit" class="generate" id="generate-btn">Generate Resume</button>
+            </form>
+            <div id="resume-container">
+                <!-- Resume Output -->
+                <div id="resume"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+
+
+    <script src="./index.js"></script>
+
+
+
+<!-- Resume Display -->
+<div id="resume"></div>
+
+<!-- Share and Download Options -->
+<div id="link-modal" style="display: none;">
+    <p id="shareable-link"></p>
+    <button id="copy-link-btn" style="display: none;"><b><h3>Copy Link</h3></b></button>
+    <button id="download-btn"><b><h3>Download PDF</h3></b></button>
+    <button id="close-modal">Close</button>
+</div>
+
+
+
+</body>
+</html>
